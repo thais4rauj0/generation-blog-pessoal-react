@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;700;900&display=swap');
+:root{
+    --gradient-primary: linear-gradient(40deg, rgba(3,3,3,1) 3%, rgba(75,35,117,1) 58%, rgba(62,25,142,1) 100%);
+    --gradient-hover: linear-gradient(0deg, rgba(37,16,115,1) 0%, rgba(6,2,115,1) 100%);
+    --primary-color: rgba(62,25,142,1);
+    --secondary-color: rgba(75,35,117,1);
+}
+
+.fundoLogin{
+    background-image: url(/src/assets/gif-cidade.gif);
+    min-height: 100vh!important;
+    background-size: cover;
+    background-position: center;
+}
+.text-decoration-none{
+    text-decoration: none;
+}
+.texto{
+    font-family: 'Red Hat Display', sans-serif!important;
+    color: var(--primary-color);
+    font-weight: 1000!important;
+}
+.botao{
+    color: #fff;
+    background: rgb(3,3,3);
+    background-image: var(--gradient-primary);
+}
+.botao:hover{
+    background: rgb(37,16,115);
+    background-image: var(--gradient-hover);
+
+}

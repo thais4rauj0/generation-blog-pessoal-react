@@ -8,20 +8,16 @@ function Home() {
     <>
       <Grid
         container
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        style={{ backgroundColor: "#3F51B5" }}
+        className="caixa"
       >
         <Grid alignItems="center" item xs={6}>
           <Box paddingX={20}>
             <Typography
               variant="h3"
               gutterBottom
-              color="textPrimary"
               component="h3"
               align="center"
-              style={{ color: "white", fontWeight: "bold" }}
+              className="titulo"
             >
               Seja bem vindo(a)!
             </Typography>
@@ -31,7 +27,7 @@ function Home() {
               color="textPrimary"
               component="h5"
               align="center"
-              style={{ color: "white", fontWeight: "bold" }}
+              className="titulo"
             >
               expresse aqui os seus pensamentos e opiniões!
             </Typography>
@@ -40,11 +36,7 @@ function Home() {
             <Box marginRight={1}></Box>
             <Button
               variant="outlined"
-              style={{
-                borderColor: "white",
-                backgroundColor: "#3F51B5",
-                color: "white",
-              }}
+              className = "botao"
             >
               Ver Postagens
             </Button>
@@ -52,7 +44,7 @@ function Home() {
         </Grid>
         <Grid item xs={6}>
           <img
-            src="https://i.imgur.com/H88yIo2.png"
+            src="https://i.imgur.com/YVfIdlR.png"
             alt=""
             width="500px"
             height="500px"
