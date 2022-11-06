@@ -1,0 +1,19 @@
+.imagem2{
+    background-image: url(/src/assets/gif-restaurante.gif);
+    min-height: 100vh!important;
+    background-size: cover;
+    background-position: center;
+}
+.botaoCancelar{
+    background: rgb(91,13,62);
+    background: linear-gradient(0deg, rgba(91,13,62,1) 0%, rgba(115,2,2,1) 100%);
+    color: #fff !important;
+    font-weight:bold!important;
+    margin-left: 1rem!important;
+}
+.botaoCancelar:hover{
+    background: rgb(3,3,3);
+    background: linear-gradient(40deg, rgba(3,3,3,1) 3%, rgba(75,35,117,1) 58%, rgba(62,25,142,1) 100%);
+    color: #fff !important;
+   
+}

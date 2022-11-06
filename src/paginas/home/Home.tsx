@@ -19,7 +19,7 @@ function Home() {
               align="center"
               className="titulo"
             >
-              Seja bem vindo(a)!
+              Bem vindo(a) ao meu blog!
             </Typography>
             <Typography
               variant="h5"
@@ -27,9 +27,9 @@ function Home() {
               color="textPrimary"
               component="h5"
               align="center"
-              className="titulo"
+              className="apresentacao"
             >
-              expresse aqui os seus pensamentos e opiniões!
+              Meu nome é Thais e vou compartilhar minha experiência em restaurantes e passeios pela cidade de São Paulo!
             </Typography>
           </Box>
           <Box display="flex" justifyContent="center">
@@ -44,7 +44,7 @@ function Home() {
         </Grid>
         <Grid item xs={6}>
           <img
-            src="https://i.imgur.com/YVfIdlR.png"
+            src="https://i.imgur.com/9KkVpTB.png"
             alt=""
             width="500px"
             height="500px"

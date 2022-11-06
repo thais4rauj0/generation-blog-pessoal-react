@@ -15,7 +15,7 @@
 }
 .MuiAppBar-colorPrimary{
     background: rgb(3,3,3);
-    background: var(--gradient-primary);
+    background-image: var(--gradient-primary);
 }
 .MuiTypography-h6{
     font-family:  'Red Hat Display', sans-serif!important;
