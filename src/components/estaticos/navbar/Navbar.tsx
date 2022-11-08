@@ -10,8 +10,8 @@ function Navbar(){
           <AppBar position="static">
                 <Toolbar variant="dense">
                     <Box className="cursor" >
-                        <Typography variant="h5" color="inherit">
-                           Voyage
+                        <Typography variant="h5" color="inherit" className='nomeBlog'>
+                          ViaSP
                         </Typography>
                     </Box>
 
