@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;700;900&display=swap');
+.topo{
+    margin-top: 20px;
+}
+.titulo1{
+    color:black;
+    font-weight:bold;
+    font-family: 'Red Hat Display', sans-serif;
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+.descricao{
+    margin-bottom: 15px;
+}

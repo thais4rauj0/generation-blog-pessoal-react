@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;700;900&display=swap');
+*{
+    font-family: 'Red Hat Display', sans-serif!important;
+}
+.fundo-card{
+    background-color: rgba(75,35,117,1)!important;
+    width: 30vw;
+    height: 35vh;
+    color: #FFFFFF!important;
+}
+.tituloPostagem{
+    font-weight: 900;
+    color: black;
+    margin-bottom: 15px;
+}
