@@ -1,16 +1,15 @@
 import React from "react";
 import "./Home.css";
-import { Button, Grid, Paper, Typography } from "@material-ui/core";
+import { Button, Grid, Typography } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import TabPostagem from "../../components/postagens/tabpostagem/TabPostagem";
+import ModalPostagem from "../../components/postagens/modalPostagem/ModalPostagem";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
     <>
-      <Grid
-        container
-        className="caixa"
-      >
+      <Grid container className="caixa">
         <Grid alignItems="center" item xs={6}>
           <Box paddingX={20}>
             <Typography
@@ -30,17 +29,19 @@ function Home() {
               align="center"
               className="apresentacao"
             >
-              Meu nome é Thais e vou compartilhar minha experiência em restaurantes e passeios pela cidade de São Paulo!
+              Meu nome é Thais e vou compartilhar minha experiência em
+              restaurantes e passeios pela cidade de São Paulo!
             </Typography>
           </Box>
           <Box display="flex" justifyContent="center">
-            <Box marginRight={1}></Box>
-            <Button
-              variant="outlined"
-              className = "botao"
-            >
-              Ver Postagens
-            </Button>
+            <Box marginRight={1}>
+              <ModalPostagem />
+            </Box>
+            <Link to="/posts">
+              <Button variant="outlined" className="botao">
+                Ver Postagens
+              </Button>
+            </Link>
           </Box>
         </Grid>
         <Grid item xs={6}>
@@ -52,7 +53,7 @@ function Home() {
           />
         </Grid>
         <Grid xs={12} className="postagens">
-          <TabPostagem/>
+          <TabPostagem />
         </Grid>
       </Grid>
     </>

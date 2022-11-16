@@ -5,11 +5,23 @@
 .fundo-card{
     background-color: rgba(75,35,117,1)!important;
     width: 30vw;
-    height: 35vh;
+    height: 100%;
     color: #FFFFFF!important;
 }
 .tituloPostagem{
-    font-weight: 900;
+    font-size: 32px!important;
+    font-weight: 900!important;
     color: black;
     margin-bottom: 15px;
+}
+.textoPost{
+    margin-top: 15px!important;
+    font-weight: 500!important;
+    font-size: 18px!important;
+}
+.descricao{
+    font-size: 12px!important;
+    color: #1e1e1f;
+    margin-top: 15px!important;
+    text-align:end;
 }

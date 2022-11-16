@@ -3,12 +3,20 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
 import './ListaPostagem.css';
 import Postagem from '../../../models/Postagem';
-import useLocalStorage from 'react-use-localstorage';
 import { busca } from '../../../services/Service';
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../../store/tokens/tokensReducer';
 
 function ListaPostagem() {
   const [posts, setPosts] = useState<Postagem[]>([]);
-  const [token, setToken] = useLocalStorage('token');
+  
+  const userId = useSelector<TokenState, TokenState['id']>(
+    (state) => state.id
+  )
+  
+  const token = useSelector<TokenState, TokenState['tokens']>(
+    (state) => state.tokens
+  )
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -47,24 +55,24 @@ function ListaPostagem() {
               {post.titulo}
             </Typography>
 
-            <Typography variant="body2" component="p">
+            <Typography variant="body2" component="p" className='textoPost'>
               {post.texto}
             </Typography>
             
-            <Typography variant="body2" component="p">
-              Mostrar apenas data: {new Date(Date.parse(post.data)).toLocaleDateString()} <br />
+            <Typography variant="body2" component="p" className='descricao'>
+              Data: {new Date(Date.parse(post.data)).toLocaleDateString()} <br />
               {/* Mostar data e hora: {new Date(Date.parse(post.data)).toLocaleString()} <br />
               Mostrar apenas hora: {new Date(Date.parse(post.data)).toLocaleTimeString()} */}
             </Typography>
 
-            <Typography variant="body2" component="p">
-              {post.tema?.descricao}
+            <Typography variant="body2" component="p" className='descricao'>
+              Tema: {post.tema?.descricao}
             </Typography>
           </CardContent>
 
           <CardActions>
             <Box display="flex" justifyContent="center" mb={1.5}>
-              <Link to={`/editarPostagem/${post.id}`} className="text-decoration-none">
+              <Link to={`/formularioPostagem/${post.id}`} className="text-decoration-none">
                 <Box mx={1}>
                   <Button
                     variant="contained"

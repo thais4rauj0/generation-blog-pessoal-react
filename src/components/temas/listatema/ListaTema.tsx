@@ -4,35 +4,37 @@ import { useNavigate } from 'react-router-dom';
 import {Box, Card, CardActions, CardContent, Button, Typography} from '@material-ui/core';
 import './ListaTema.css';
 import Tema from '../../../models/Tema';
-import useLocalStorage from 'react-use-localstorage';
-import { getTokenSourceMapRange } from 'typescript';
 import { busca } from '../../../services/Service';
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../../store/tokens/tokensReducer';
 
 function ListaTema(){
-    const [temas, setTemas] = useState<Tema[]>([]);
-    const [token,setToken] = useLocalStorage('token');
-    let navigate = useNavigate(); 
+  const [temas, setTemas] = useState<Tema[]>([])
+  let navigate = useNavigate();
+  const token = useSelector<TokenState, TokenState["tokens"]>(
+    (state) => state.tokens
+  );
 
-    useEffect(()=>{
-        if(token==''){
-            alert('Você precisa estar logado!');
-            navigate('/login')
-        }
-    }, [token])
-
-    async function getTema(){
-        await busca('/temas', setTemas, {
-            headers: {
-              Authorization: token
-            }
-          })
+  useEffect(()=>{
+    if(token == ''){
+      alert("Você precisa estar logado")
+      navigate("/login")
     }
+  }, [token])
 
-    useEffect(()=>{
-        getTema()
-        console.log('tema');
-    }, [temas.length]
-    )
+
+  async function getTema(){
+    await busca("/temas", setTemas, {
+      headers: {
+        'Authorization': token
+      }
+    })
+  }
+
+
+  useEffect(()=>{
+    getTema()
+  }, [temas.length])
 
     return (
         <>
@@ -43,7 +45,7 @@ function ListaTema(){
         <Card variant="outlined">
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
-              Tema {index + 1}
+              Tema {index+1}
             </Typography>
 
             <Typography variant="h5" component="h2">
@@ -53,7 +55,7 @@ function ListaTema(){
 
           <CardActions>
             <Box display="flex" justifyContent="center" mb={1.5}>
-              <Link to={`/editarTema/${tema.id}`} className="text-decoration-none">
+              <Link to={`/formularioTema/${tema.id}`} className="text-decoration-none">
                 <Box mx={1}>
                   <Button
                     variant="contained"
@@ -66,7 +68,7 @@ function ListaTema(){
                 </Box>
               </Link>
 
-              <Link to={`/apagarTema/${tema.id}`} className="text-decoration-none">
+              <Link to={`/deletarTema/${tema.id}`} className="text-decoration-none">
                 <Box mx={1}>
                   <Button variant="contained" size="small" className='botaoCancelar'>
                     Deletar

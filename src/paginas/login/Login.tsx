@@ -1,48 +1,70 @@
 import React, {ChangeEvent, useState, useEffect} from 'react';
 import {Button, Grid, Box, Typography, TextField} from '@material-ui/core';
 import {Link, useNavigate} from 'react-router-dom';
-import useLocalStorage from 'react-use-localstorage';
 import { login} from '../../services/Service';
 import './Login.css';
 import UserLogin from '../../models/UserLogin';
-import { setTokenSourceMapRange } from 'typescript';
+import { addId, addToken } from '../../store/tokens/actions';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 function Login(){
-        let navigate = useNavigate();
-        const[token, setToken] = useLocalStorage('token');
-        const[userLogin, setUserLogin]= useState <UserLogin> (
-            {
-            id:0,
-            usuario:'',
-            senha: '',
-            token: ''
-            }
-        )
+    const [userLogin, setUserLogin] = useState<UserLogin>({
+        id: 0,
+        nome: '',
+        usuario: '',
+        senha: '',
+        foto: '',
+        token: '',
+      });
+      const [respUserLogin, setRespUserLogin] = useState<UserLogin>({
+        id: 0,
+        nome: '',
+        usuario: '',
+        senha: '',
+        foto: '',
+        token: '',
+      });
 
-        function updatedModel(e: ChangeEvent<HTMLInputElement>){
+        let history = useNavigate();
 
-            setUserLogin({
-                ...userLogin,
-                [e.target.name]: e.target.value
-            })
+        // Hooks que vão manipular o nosso Local Storage para gravar o Token
+        // const [token, setToken] = useLocalStorage('token');
+      
+        //novo metodo de login, utilizando o redux
+        const dispatch = useDispatch()
+      
+        const [token, setToken] = useState('')
+      
+        // Função que junto com a setUserLogin irá atualizar o valor inicial da userLogin
+        function updateModel(event: ChangeEvent<HTMLInputElement>) {
+          setUserLogin({
+            ...userLogin,
+            [event.target.name]: event.target.value,
+          });
         }
-
-        useEffect(()=>{
-            if(token != ''){
-                navigate('/home')
-             }
-             }, [token])
-
-        async function onSubmit(e:ChangeEvent<HTMLFormElement>){
+      
+        // Função que irá enviar os dados de fato para o backend, interligando com o conteudo da Service.ts
+        async function onSubmit(e: ChangeEvent<HTMLFormElement>){
             e.preventDefault();
+            try{
+                await login(`/usuarios/logar`, userLogin, setToken)
 
-           try {
-                await login('/usuarios/logar',userLogin,setToken)
-                alert('Usuario logado com sucesso!');
-           } catch (error) {
-            alert('Dados do usuario inconsistentes. Erro ao Logar!');
-           }
+                alert('Usuário logado com sucesso!');
+            }catch(error){
+                alert('Dados do usuário inconsistentes. Erro ao logar!');
+            }
         }
+
+      
+        // Hook de efeito colateral, sempre executa uma função quando o que estiver no seu Array é alterado
+        useEffect(() => {
+          if (token !== '') {
+            dispatch(addToken(token))
+            history('/home');
+          }
+        }, [token]);
+      
     return(
         <>
             <Grid container>
@@ -50,8 +72,8 @@ function Login(){
                     <Box padding = {20}>
                         <form onSubmit={onSubmit}>
                             <Typography variant ='h3' component='h3' align='center' className='texto'>Entrar</Typography>
-                            <TextField value={userLogin.usuario} onChange={(e:ChangeEvent<HTMLInputElement>)=>updatedModel(e)} id ='usuario' label='Usuário(e-mail)' name='usuario' margin ='normal' fullWidth/> 
-                            <TextField value={userLogin.senha} onChange={(e:ChangeEvent<HTMLInputElement>) => updatedModel(e)} id='senha' label='senha' name='senha' margin='normal' type='password'fullWidth />
+                            <TextField value={userLogin.usuario} onChange={(e:ChangeEvent<HTMLInputElement>)=>updateModel(e)} id ='usuario' label='Usuário(e-mail)' name='usuario' margin ='normal' fullWidth/> 
+                            <TextField value={userLogin.senha} onChange={(e:ChangeEvent<HTMLInputElement>) => updateModel(e)} id='senha' label='senha' name='senha' margin='normal' type='password'fullWidth />
                           <Box marginTop = {5} textAlign = 'center'>  
 
                                 <Button type = 'submit' variant='contained' className='botao'>Entrar</Button>

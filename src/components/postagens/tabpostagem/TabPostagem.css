@@ -1,0 +1,22 @@
+.box-sobre{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.titulo{
+    font-weight: 900!important;
+    font-size: 32px!important;
+    margin-bottom: 20px!important;
+}
+.conteudo-sobre{
+    width: 50vw;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 50px;
+    background-color: rgba(75,35,117,1);
+    border-radius: 5px;
+    
+}

@@ -5,83 +5,80 @@ import './CadastroTema.css';
 import useLocalStorage from 'react-use-localstorage';
 import Tema from '../../../models/Tema';
 import { buscaId, post, put } from '../../../services/Service';
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../../store/tokens/tokensReducer';
+
 
 
 function CadastroTema() {
-    let navigate = useNavigate();
-    const { id } = useParams<{id: string}>();
-    const [token, setToken] = useLocalStorage('token');
-    const [tema, setTema] = useState<Tema>({
-        id: 0,
-        descricao: ''
-    })
+  let navigate = useNavigate();
+  const { id } = useParams<{id: string}>();
+  const token = useSelector<TokenState, TokenState["tokens"]>(
+      (state) => state.tokens
+    );
+  const [tema, setTema] = useState<Tema>({
+      id: 0,
+      descricao: ''
+  })
 
-    useEffect(() => {
-        if (token == "") {
-            alert("Você precisa estar logado")
-            navigate("/login")
-    
-        }
-    }, [token])
+  useEffect(() => {
+      if (token == "") {
+          alert("Você precisa estar logado")
+          navigate("/login")
+  
+      }
+  }, [token])
 
-    useEffect(() =>{
-        if(id !== undefined){
-            findById(id)
-        }
-    }, [id])
+  useEffect(() =>{
+      if(id !== undefined){
+          findById(id)
+      }
+  }, [id])
 
-    async function findById(id: string) {
-        buscaId(`/tema/${id}`, setTema, {
-            headers: {
-              'Authorization': token
-            }
+  async function findById(id: string) {
+      buscaId(`/temas/${id}`, setTema, {
+          headers: {
+            'Authorization': token
+          }
+        })
+      }
+
+      function updatedTema(e: ChangeEvent<HTMLInputElement>) {
+
+          setTema({
+              ...tema,
+              [e.target.name]: e.target.value,
           })
-        }
-
-        function updatedTema(e: ChangeEvent<HTMLInputElement>) {
-
-            setTema({
-                ...tema,
-                [e.target.name]: e.target.value,
-            })
-    
-        }
-        
-        async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
-            e.preventDefault()
-
-    if(id !== undefined) {
-      try {
-        await put('/temas', tema, setTema, {
-          headers: {
-            Authorization: token,
-          },
-        })
-
-        alert('Tema atualizado com sucesso')
-      } catch (error) {
-        alert('Falha ao atualizar o tema')
+  
       }
-    } else {
-      try {
-        await post('/temas', tema, setTema, {
-          headers: {
-            Authorization: token,
-          },
-        })
-
-        alert('Tema cadastrado com sucesso')
-      } catch (error) {
-        alert('Falha ao cadastrar o tema')
+      
+      async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
+          e.preventDefault()
+          console.log("tema" + JSON.stringify(tema))
+  
+          if (id !== undefined) {
+              console.log(tema)
+              put(`/temas`, tema, setTema, {
+                  headers: {
+                      'Authorization': token
+                  }
+              })
+              alert('Tema atualizado com sucesso');
+          } else {
+              post(`/temas`, tema, setTema, {
+                  headers: {
+                      'Authorization': token
+                  }
+              })
+              alert('Tema cadastrado com sucesso');
+          }
+          back()
+  
       }
-    }
-
-    back()
-        }
-    
-        function back() {
-            navigate('/temas')
-        }
+  
+      function back() {
+          navigate('/temas')
+      }
   
     return (
         <Container maxWidth="sm" className="topo">

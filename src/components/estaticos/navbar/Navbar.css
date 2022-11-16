@@ -9,6 +9,9 @@
     cursor:pointer;
     color:#fff;
 }
+.cursor:hover{
+    color: rgb(195, 168, 252) ;
+}
 .text-decoration-none{
     text-decoration: none!important;
     color: #fff;
